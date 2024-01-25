@@ -1,13 +1,14 @@
 import json
 import boto3
 import requests
+import argparse
 
 class Assignment:
-    def __init__(self, url, bucket_name):
-        self.url = url
+    def __init__(self, bucket_name, region):
+        self.url = "https://dummyjson.com/products"
         self.aws_profile = "default"
         self.bucket_name = bucket_name
-        self.region = "eu-central-1"
+        self.region = region
         self.aws_session = boto3.session.Session(region_name=self.region, profile_name=self.aws_profile)
         self.client = self.aws_session.client('s3')
 
@@ -29,6 +30,11 @@ class Assignment:
             Key="final_catalog.json"
         )
 
-x = Assignment(url="https://dummyjson.com/products", bucket_name="gilad-assignment-jan-2024")
-x.save_filtered_products_by_price()
-x.upload_filtered_products_to_s3()
+parser = argparse.ArgumentParser(description='Upload filtered products list to s3')
+parser.add_argument('--bucket', type=str, required=True, help='Name of bucket created in terraform')
+parser.add_argument('--region', type=str, required=True, help='AWS region name')
+args = parser.parse_args()
+
+obj = Assignment(bucket_name=args.bucket, region=args.region)
+obj.save_filtered_products_by_price()
+obj.upload_filtered_products_to_s3()
