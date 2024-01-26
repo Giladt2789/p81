@@ -4,10 +4,11 @@ on:
     branches: [ main ]
   workflow_dispatch:
     inputs:
-      description: 'AWS region for assignment'
-      required: true
-      default: 'eu-central-1'
-      type: string
+      region:
+        description: 'AWS region for assignment'
+        required: true
+        default: 'eu-central-1'
+        type: string
 
 jobs:
   pre-configurations:
