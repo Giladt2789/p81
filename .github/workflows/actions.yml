@@ -84,10 +84,6 @@ jobs:
       - uses: actions/checkout@v4
       - name: Execute the bucket and dynamodb table creation
         run: |
-          cd ..
-          pwd
-          ls -lah
-          cd p81
           ls -lath
         env:
           REGION: ${{ inputs.region }}
