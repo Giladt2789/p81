@@ -81,20 +81,20 @@ jobs:
     runs-on: ubuntu-latest
     needs: pre-configurations
     steps:
-    - uses: actions/checkout@v4
-    - name: Execute the bucket and dynamodb table creation
-      run: |
-        cd ..
-        pwd
-        ls -lah
-        cd p81
-        ls -lath
-      env:
-        REGION: ${{ inputs.region }}
-        BUCKET: ${{ inputs.bucket }}
-        PROFILE_NAME: ${{ inputs.profile_name }}
-        TABLE_NAME: ${{ inputs.statefile_lock_table }}
-        ACCOUNT_NUMBER: ${{ inputs.account_number }}
-        IAM_USER_NAME: ${{ inputs.iam_user_name }}
+      - uses: actions/checkout@v4
+      - name: Execute the bucket and dynamodb table creation
+        run: |
+          cd ..
+          pwd
+          ls -lah
+          cd p81
+          ls -lath
+        env:
+          REGION: ${{ inputs.region }}
+          BUCKET: ${{ inputs.bucket }}
+          PROFILE_NAME: ${{ inputs.profile_name }}
+          TABLE_NAME: ${{ inputs.statefile_lock_table }}
+          ACCOUNT_NUMBER: ${{ inputs.account_number }}
+          IAM_USER_NAME: ${{ inputs.iam_user_name }}
 
     
