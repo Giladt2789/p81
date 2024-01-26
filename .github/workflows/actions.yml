@@ -2,6 +2,12 @@ name: Github Actions pipeline testing
 on:
   push:
     branches: [ main ]
+  workflow_dispatch:
+    inputs:
+      description: 'AWS region for assignment'
+      required: true
+      default: 'eu-central-1'
+      type: string
 
 jobs:
   pre-configurations:
@@ -32,3 +38,16 @@ jobs:
         echo "[default]" > ~/.aws/credentials &&
         echo "aws_access_key_id=${{ env.AWS_ACCESS_KEY_ID }}" >> ~/.aws/credentials &&
         echo "aws_secret_access_key=${{ env.AWS_SECRET_ACCESS_KEY }}" >> ~/.aws/credentials
+    - name: Install Terraform 1.5.7
+      run: |
+        wget https://releases.hashicorp.com/terraform/1.5.7/terraform_1.5.7_linux_amd64.zip
+        unzip terraform_1.5.7_linux_amd64.zip
+        sudo mv terraform /usr/local/bin
+        terraform -version
+    - name: Install Terragrunt
+      run: |
+        cd /tmp
+        wget https://github.com/gruntwork-io/terragrunt/releases/download/v0.54.21/terragrunt_linux_amd64
+        chmod +x terragrunt_linux_amd64
+        sudo mv terragrunt_linux_amd64 /usr/local/bin/terragrunt
+        terragrunt --version
