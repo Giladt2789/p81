@@ -8,6 +8,8 @@ profile_name = os.getenv('PROFILE_NAME')
 table_name = os.getenv('TABLE_NAME')
 account_number = os.getenv('ACCOUNT_NUMBER')
 iam_user_name = os.getenv('IAM_USER_NAME')
+print(f"Region: {region}, bucket_name: {bucket_name}, profile_name: {profile_name}, "
+      f"table_name: {table_name}, account_number: {account_number}, iam_user_name: {iam_user_name}")
 
 # General attributes for the S3 bucket and the dynamodb table (for the state file)
 aws_session = boto3.session.Session(region_name=region, profile_name=profile_name)
