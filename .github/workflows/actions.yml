@@ -84,8 +84,9 @@ jobs:
     - name: Execute the bucket and dynamodb table creation
       run: |
         cd ..
+        pwd
         ls -lah
-        ../python/pre-configurations.py
+        ./p81/python/pre-configurations.py
       env:
         REGION: ${{ inputs.region }}
         BUCKET: ${{ inputs.bucket }}
