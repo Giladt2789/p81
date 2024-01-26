@@ -83,12 +83,6 @@ jobs:
     steps:
       - uses: actions/checkout@v4
       - name: Execute the bucket and dynamodb table creation
-        run: |
-          ls -lath
-          cd python
-          ls -thal
-          chmod +x *.py
-          ./pre-configurations.py
         env:
           REGION: ${{ inputs.region }}
           BUCKET: ${{ inputs.bucket }}
@@ -96,5 +90,12 @@ jobs:
           TABLE_NAME: ${{ inputs.statefile_lock_table }}
           ACCOUNT_NUMBER: ${{ inputs.account_number }}
           IAM_USER_NAME: ${{ inputs.iam_user_name }}
+        run: |
+          ls -lath
+          cd python
+          chmod +x *.py
+          ls -thal
+          ./pre-configurations.py
+
 
     
