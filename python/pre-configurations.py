@@ -4,10 +4,10 @@ import os
 
 region = os.environ['region']
 bucket_name = os.environ['bucket']
-profile_name = os.getenv('profile_name')
-table_name = os.getenv('statefile_lock_table')
-account_number = os.getenv('account_number')
-iam_user_name = os.getenv('iam_user_name')
+profile_name = os.environ['profile_name']
+table_name = os.environ['statefile_lock_table']
+account_number = os.environ['account_number']
+iam_user_name = os.environ['iam_user_name']
 print(f"Region: {region}, bucket_name: {bucket_name}, profile_name: {profile_name}, "
       f"table_name: {table_name}, account_number: {account_number}, iam_user_name: {iam_user_name}")
 
