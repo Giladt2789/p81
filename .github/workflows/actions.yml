@@ -86,6 +86,7 @@ jobs:
         cd ..
         pwd
         ls -lah
+        cd p81
         ./p81/python/pre-configurations.py
       env:
         REGION: ${{ inputs.region }}
