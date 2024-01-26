@@ -9,6 +9,21 @@ on:
         required: true
         default: 'eu-central-1'
         type: string
+      bucket:
+        description: 'S3 bucket for tfstate files (NOT PROVISIONED VIA TERRAFORM'
+        required: true
+        default: 'p81-gilad-state-files-bucket'
+        type: string
+      profile_name:
+        description: 'AWS profile for assignment'
+        required: true
+        default: 'default'
+        type: string
+      statefile_lock_table:
+        description: 'AWS DynamoDB table for statefile locks'
+        required: true
+        default: 'p81-gilad-statefile-locks-table'
+        type: string
 
 jobs:
   pre-configurations:
@@ -36,7 +51,7 @@ jobs:
         unzip awscliv2.zip > /dev/null
         sudo ./aws/install > /dev/null
         mkdir -p ~/.aws &&
-        echo "[default]" > ~/.aws/credentials &&
+        echo "[${{inputs.profile_name}}]" > ~/.aws/credentials &&
         echo "aws_access_key_id=${{ env.AWS_ACCESS_KEY_ID }}" >> ~/.aws/credentials &&
         echo "aws_secret_access_key=${{ env.AWS_SECRET_ACCESS_KEY }}" >> ~/.aws/credentials
     - name: Install Terraform 1.5.7
@@ -52,3 +67,17 @@ jobs:
         chmod +x terragrunt_linux_amd64
         sudo mv terragrunt_linux_amd64 /usr/local/bin/terragrunt
         terragrunt --version
+  Prepare_bucket_and_Dynamodb_table_for_state:
+    runs-on: ubuntu-latest
+    needs: pre-configurations
+    steps:
+    - name: Execute the bucket and dynamodb table creation
+      run: |
+        python ./python/pre-configurations.py
+      env:
+        REGION: ${{ inputs.region }}
+        BUCKET: ${{ inputs.bucket }}
+        PROFILE_NAME: ${{ inputs.profile_name }}
+        TABLE_NAME: ${{ inputs.statefile_lock_table }}
+
+    
