@@ -81,7 +81,8 @@ jobs:
     runs-on: ubuntu-latest
     needs: pre-configurations
     steps:
-    - name: Execute the bucket and dynamodb table creation
+      - uses: actions/checkout@v4
+      - name: Execute the bucket and dynamodb table creation
       run: |
         cd ..
         pwd
