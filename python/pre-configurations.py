@@ -2,8 +2,8 @@ import boto3
 import json
 import os
 
-region = os.getenv('region')
-bucket_name = os.getenv('bucket')
+region = os.environ['region']
+bucket_name = os.environ['bucket']
 profile_name = os.getenv('profile_name')
 table_name = os.getenv('statefile_lock_table')
 account_number = os.getenv('account_number')
