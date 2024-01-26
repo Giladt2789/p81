@@ -1,10 +1,13 @@
 import boto3
+import json
 import os
 
 region = os.environ['REGION']
 bucket_name = os.environ['BUCKET']
 profile_name = os.environ['PROFILE_NAME']
 table_name = os.environ['TABLE_NAME']
+account_number = os.environ['ACCOUNT_NUMBER']
+iam_user_name = os.environ['IAM_USER_NAME']
 
 # General attributes for the S3 bucket and the dynamodb table (for the state file)
 aws_session = boto3.session.Session(region_name=region, profile_name=profile_name)
@@ -21,7 +24,7 @@ bucket_versioning_response = s3_client.put_bucket_versioning(
    VersioningConfiguration={'Status': 'Enabled'}
 )
 
-s3_encryption_response = s3_client.put_bucket_encryption(
+bucket_encryption_response = s3_client.put_bucket_encryption(
     Bucket=bucket_name,
     ServerSideEncryptionConfiguration={
         'Rules': [{
@@ -30,6 +33,27 @@ s3_encryption_response = s3_client.put_bucket_encryption(
                 }
             }]
     }
+)
+
+bucket_policy_response = s3_client.put_bucket_policy(
+    Bucket=bucket_name,
+    Policy=json.dumps({
+        "Version": "2012-10-17",
+        "Statement": [
+            {
+                "Effect": "Allow",
+                "Action": "s3:ListBucket",
+                "Resource": f"arn:aws:s3:::{bucket_name}",
+                "Principal": { f"AWS": f"arn:aws:iam::{account_number}:user/{iam_user_name}" },
+            },
+            {
+                "Effect": "Allow",
+                "Action": ["s3:GetObject", "s3:PutObject", "s3:DeleteObject"],
+                "Principal": { f"AWS": f"arn:aws:iam::{account_number}:user/{iam_user_name}" },
+                "Resource": f"arn:aws:s3:::{bucket_name}/*"
+            }
+        ]
+    })
 )
 
 dynamodb_table_creation_response = dynamodb_client.create_table(

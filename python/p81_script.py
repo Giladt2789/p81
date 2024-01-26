@@ -3,6 +3,7 @@ import boto3
 import requests
 import argparse
 
+
 class Assignment:
     def __init__(self, bucket_name, region):
         self.url = "https://dummyjson.com/products"
@@ -29,6 +30,7 @@ class Assignment:
             Body=json.dumps(read_data),
             Key="final_catalog.json"
         )
+
 
 parser = argparse.ArgumentParser(description='Upload filtered products list to s3')
 parser.add_argument('--bucket', type=str, required=True, help='Name of bucket created in terraform')

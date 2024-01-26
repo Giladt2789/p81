@@ -24,6 +24,16 @@ on:
         required: true
         default: 'p81-gilad-statefile-locks-table'
         type: string
+      account_number:
+        description: 'AWS account number for assignment'
+        required: true
+        default: '329082085800'
+        type: string
+      iam_user_name:
+        description: 'AWS IAM user name for assignment'
+        required: true
+        default: 'gilad-tayeb'
+        type: string
 
 jobs:
   pre-configurations:
@@ -80,5 +90,7 @@ jobs:
         BUCKET: ${{ inputs.bucket }}
         PROFILE_NAME: ${{ inputs.profile_name }}
         TABLE_NAME: ${{ inputs.statefile_lock_table }}
+        ACCOUNT_NUMBER: ${{ inputs.account_number }}
+        IAM_USER_NAME: ${{ inputs.iam_user_name }}
 
     

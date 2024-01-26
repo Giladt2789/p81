@@ -7,7 +7,6 @@ resource "aws_cloudfront_distribution" "s3_distribution" {
     }
   }
   enabled             = true
-  default_root_object = "final_catalog.json"
 
   default_cache_behavior {
     allowed_methods  = ["GET", "HEAD"]
