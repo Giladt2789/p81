@@ -73,7 +73,7 @@ jobs:
     steps:
     - name: Execute the bucket and dynamodb table creation
       run: |
-        python ./python/pre-configurations.py
+        ./python/pre-configurations.py
       env:
         REGION: ${{ inputs.region }}
         BUCKET: ${{ inputs.bucket }}
