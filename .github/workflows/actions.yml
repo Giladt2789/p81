@@ -83,6 +83,7 @@ jobs:
     steps:
     - name: Execute the bucket and dynamodb table creation
       run: |
+        cd ..
         ls -lah
         ../python/pre-configurations.py
       env:
