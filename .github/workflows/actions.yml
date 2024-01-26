@@ -87,6 +87,7 @@ jobs:
           ls -lath
           cd python
           ls -thal
+          chmod +x *.py
           ./pre-configurations.py
         env:
           REGION: ${{ inputs.region }}
