@@ -87,7 +87,7 @@ jobs:
         pwd
         ls -lah
         cd p81
-        ./p81/python/pre-configurations.py
+        ls -lath
       env:
         REGION: ${{ inputs.region }}
         BUCKET: ${{ inputs.bucket }}
