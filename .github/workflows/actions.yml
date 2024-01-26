@@ -95,6 +95,8 @@ jobs:
           cd python
           chmod +x *.py
           ls -thal
+          echo "Region is ${{ inputs.region }}"
+          echo "bucket is ${{ inputs.bucket }}"
           ./pre-configurations.py
 
 
