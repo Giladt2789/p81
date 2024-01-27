@@ -5,11 +5,16 @@ remote_state {
     if_exists = "overwrite_terragrunt"
   }
   config = {
-    bucket = "p81-gilad-test-1"
+    bucket = get_env("STATE_FILES_BUCKET")
 
     key = "${path_relative_to_include()}/terraform.tfstate"
-    region         = "eu-central-1"
+    region         = get_env("REGION")
     encrypt        = true
-    dynamodb_table = "gilad-state-lock-table"
+    dynamodb_table = get_env("STATEFILE_LOCK_TABLE")
   }
+}
+
+terraform {
+  source = "provider.tf"
+  terraform_binary_constraints = ""
 }
