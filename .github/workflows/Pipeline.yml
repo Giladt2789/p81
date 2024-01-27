@@ -77,6 +77,12 @@ jobs:
           sudo mv terragrunt /usr/bin
           terragrunt --version
           terraform --version
+      - name: Configure AWS CLI
+        run: |
+          aws configure set aws_access_key_id ${{ secrets.AWS_ACCESS_KEY_ID }}
+          aws configure set aws_secret_access_key ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          aws configure set default.region eu-central-1
+          aws configure set default.output json
       - name: Run the terragrunt configuration
         run: |
           python --version
