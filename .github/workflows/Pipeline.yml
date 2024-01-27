@@ -90,7 +90,7 @@ jobs:
         uses: hashicorp/setup-terraform@v2
         with:
           terraform_version: 1.5.7
-#          terraform_wrapper: true
+          terraform_wrapper: true
       - name: Setup Terraform version
         run: terraform --version
       - name: Setup Terraform wrapper path
@@ -100,6 +100,8 @@ jobs:
         with:
           terragrunt_version: 0.54.21
           token: ${{ secrets.GITHUB_TOKEN }}
+      - name: Override Terraform binary
+        run: export TERRAFORM_BINARY=$(which terraform)
       - name: Interact with Terragrunt
         run: |
           terragrunt --version
