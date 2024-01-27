@@ -1,6 +1,8 @@
 name: my-workflow
 
-on: [push]
+on:
+  push:
+    branches: [ main ]
 
 jobs:
 
@@ -45,4 +47,11 @@ jobs:
     - uses: actions/checkout@v4
     - name: Run Python script
       run: |
-        python ./python/my_script.py
+        ls -thal
+        export REGION="eu-central-1"
+        export BUCKET="p81-gilad-state-files-bucket"
+        export PROFILE_NAME="default"
+        export STATEFILE_LOCK_TABLE="p81-gilad-statefile-locks-table"
+        export ACCOUNT_NUMBER="329082085800"
+        export IAM_USER_NAME="gilad-tayeb"
+        python ./python/pre-configurations.py
