@@ -23,15 +23,7 @@ jobs:
       with:
         python-version: '3.10'
         cache: 'pip'
-    - name: Install Terraform
-      uses: hashicorp/setup-terraform@v2
-      with:
-        terraform_version: 1.5.7
-    - name: Install Terragrunt
-      run: |
-        wget -O - https://github.com/gruntwork-io/terragrunt/releases/download/v0.54.21/terragrunt_linux_amd64 > terragrunt
-        chmod +x terragrunt
-        sudo mv terragrunt /usr/bin
+
 
   run-code:
     needs: install
@@ -47,10 +39,6 @@ jobs:
         curl "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip" -o "awscliv2.zip" > /dev/null
         unzip awscliv2.zip > /dev/null
         sudo ./aws/install > /dev/null
-#        mkdir -p ~/.aws &&
-#        echo "[${{inputs.profile_name}}]" > ~/.aws/credentials &&
-#        echo "aws_access_key_id=${{ env.AWS_ACCESS_KEY_ID }}" >> ~/.aws/credentials &&
-#        echo "aws_secret_access_key=${{ env.AWS_SECRET_ACCESS_KEY }}" >> ~/.aws/credentials
     - name: Configure AWS credentials
       uses: aws-actions/configure-aws-credentials@v1
       with:
@@ -71,3 +59,19 @@ jobs:
     - name: Run Python script
       run: |
         python ./python/pre-configurations.py
+    - name: Install Terraform
+      uses: hashicorp/setup-terraform@v2
+      with:
+        terraform_version: 1.5.7
+    - name: Install Terragrunt
+      run: |
+        wget -O - https://github.com/gruntwork-io/terragrunt/releases/download/v0.54.21/terragrunt_linux_amd64 > terragrunt
+        chmod +x terragrunt
+        sudo mv terragrunt /usr/bin
+        terragrunt --version
+        terraform --version
+        ls -thal
+    - name: Run the terragrunt configuration
+      run: |
+        echo "hello"
+        
