@@ -45,3 +45,8 @@ resource "aws_cloudfront_distribution" "s3_distribution" {
 resource "aws_cloudfront_origin_access_identity" "default" {
   comment = "Origin access identity for the distribution"
 }
+
+resource "local_file" "cloudfront_domain" {
+  content = aws_cloudfront_distribution.s3_distribution.domain_name
+  filename = "${path.module}/cloudfront_domain.txt"
+}
