@@ -14,6 +14,7 @@ jobs:
       uses: actions/setup-python@v4
       with:
         python-version: '3.10'
+        cache: 'pip'
     - name: Install dependencies
       run: |
         python -m pip install --upgrade pip
@@ -39,12 +40,23 @@ jobs:
         echo "[${{inputs.profile_name}}]" > ~/.aws/credentials &&
         echo "aws_access_key_id=${{ env.AWS_ACCESS_KEY_ID }}" >> ~/.aws/credentials &&
         echo "aws_secret_access_key=${{ env.AWS_SECRET_ACCESS_KEY }}" >> ~/.aws/credentials
+    - name: Cache .aws folder
+      uses: actions/cache@v4
+      with:
+        path: ~/.aws
+        key: ${{ runner.os }}-aws
+
 
   run-script:
     needs: install
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v4
+    - name: Restore .aws cache
+      uses: actions/cache@v2
+      with:
+        path: ~/.aws
+        key: ${{ runner.os }}-aws
     - name: Run Python script
       run: |
         ls -thal
