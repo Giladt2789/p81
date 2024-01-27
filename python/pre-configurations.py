@@ -8,6 +8,7 @@ profile_name = os.environ['PROFILE_NAME']
 table_name = os.environ['STATEFILE_LOCK_TABLE']
 account_number = os.environ['ACCOUNT_NUMBER']
 iam_user_name = os.environ['IAM_USER_NAME']
+print(f'Region: {region}, bucket_name: {bucket_name}')
 print(f"Region: {region}, bucket_name: {bucket_name}, profile_name: {profile_name}, table_name: {table_name}, account_number: {account_number}, iam_user_name: {iam_user_name}")
 
 # General attributes for the S3 bucket and the dynamodb table (for the state file)
