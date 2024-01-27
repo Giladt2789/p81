@@ -77,13 +77,19 @@ jobs:
         run: terraform --version
       - name: Setup Terraform wrapper path
         run: which terraform
-      - name: Install Terragrunt
+      - name: Setup Terragrunt
+        uses: autero1/action-terragrunt@v1.1.0
+        with:
+          terragrunt_version: 0.21.13
+          token: ${{ secrets.GITHUB_TOKEN }}
+      - name: Interact with Terragrunt
         run: |
-          wget -O - https://github.com/gruntwork-io/terragrunt/releases/download/v0.54.21/terragrunt_linux_amd64 > terragrunt
-          chmod +x terragrunt
-          sudo mv terragrunt /usr/bin
           terragrunt --version
-          terraform --version
+#      - name: Install Terragrunt
+#        run: |
+#          wget -O - https://github.com/gruntwork-io/terragrunt/releases/download/v0.54.21/terragrunt_linux_amd64 > terragrunt
+#          chmod +x terragrunt
+#          sudo mv terragrunt /usr/bin
       - name: Configure AWS CLI
         run: |
           aws configure set aws_access_key_id ${{ secrets.AWS_ACCESS_KEY_ID }}
