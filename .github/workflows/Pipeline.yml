@@ -94,7 +94,9 @@ jobs:
       - name: Setup Terraform version
         run: terraform --version
       - name: Setup Terraform wrapper path
-        run: which terraform
+        run: |
+          which terraform
+          echo "$GITHUB_WORKSPACE/terraform" >> $GITHUB_PATH
       - name: Setup Terragrunt
         uses: autero1/action-terragrunt@v1.1.0
         with:
