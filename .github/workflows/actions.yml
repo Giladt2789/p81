@@ -65,7 +65,7 @@ jobs:
           cd python
           chmod +x *.py
           ls -thal
-          ./pre-configurations.py
+          python ./pre-configurations.py
 
 
     
