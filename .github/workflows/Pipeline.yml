@@ -106,8 +106,6 @@ jobs:
           cd ./Terraform
           pwd
           ls -lah
-      - name: Trigger the terragrunt deployment
-        run: |
           terragrunt apply --auto-approve --terragrunt-non-interactive
       - name: Trigger the python code that filters the json file
         run: |
