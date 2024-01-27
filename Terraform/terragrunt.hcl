@@ -13,3 +13,7 @@ remote_state {
     dynamodb_table = get_env("STATEFILE_LOCK_TABLE")
   }
 }
+
+terraform {
+  extra_arguments " -var-file=globals.tfvars"
+}

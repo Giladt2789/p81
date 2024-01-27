@@ -99,9 +99,6 @@ jobs:
         run: |
           which terraform
           pwd
-      - name: Setting AWS env. vars.
-        run: |
-          printenv
       - name: Deploy
         uses: gruntwork-io/terragrunt-action@v2
         with:
