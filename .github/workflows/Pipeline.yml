@@ -96,21 +96,26 @@ jobs:
       - name: Setup Terraform wrapper path
         run: |
           which terraform
-          echo "$GITHUB_WORKSPACE/terraform" >> $GITHUB_PATH
-      - name: Setup Terragrunt
-        uses: autero1/action-terragrunt@v1.1.0
+#          echo "$GITHUB_WORKSPACE/terraform" >> $GITHUB_PATH
+#      - name: Setup Terragrunt
+#        uses: autero1/action-terragrunt@v1.1.0
+#        with:
+#          terragrunt_version: 0.54.21
+#          token: ${{ secrets.GITHUB_TOKEN }}
+      - name: Deploy
+        uses: gruntwork-io/terragrunt-action@v2
         with:
-          terragrunt_version: 0.54.21
-          token: ${{ secrets.GITHUB_TOKEN }}
-      - name: Override Terraform binary
-        run: export TERRAFORM_BINARY=$(which terraform)
+          tf_version: 1.5.7
+          tg_version: 0.54.21
+          tg_dir: .
+          tg_command: 'apply'
       - name: Interact with Terragrunt
         run: |
           terragrunt --version
           cd ./Terraform
           pwd
           ls -lah
-          terragrunt apply --auto-approve --terragrunt-non-interactive
+#          terragrunt apply --auto-approve --terragrunt-non-interactive
       - name: Trigger the python code that filters the json file
         run: |
           cd ../python
