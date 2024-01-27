@@ -68,4 +68,4 @@ jobs:
         pip install -r ./python/requirements.txt
     - name: Run Python script
       run: |
-        python ./python/test.py
+        python ./python/pre-configurations.py
