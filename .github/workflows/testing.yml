@@ -55,6 +55,7 @@ jobs:
         key: ${{ runner.os }}-aws
     - name: Install dependencies
       run: |
+        ls -thal ~/.aws/
         python -m pip install --upgrade pip
         pip install -r ./python/requirements.txt
     - name: Run Python script
