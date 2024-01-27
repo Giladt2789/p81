@@ -92,10 +92,10 @@ jobs:
           echo "aws_profile = \"$PROFILE_NAME\"" >> globals.tfvars
           echo "bucket_name = \"$TASK_BUCKET_NAME\"" >> globals.tfvars
           echo "origin_id = \"$ORIGIN_ID\"" >> globals.tfvars
-          cat globals.tfvars
-          pwd
       - name: Trigger the terragrunt deployment
         run: |
+          cd ./Terraform
+          pwd
           terragrunt apply --auto-approve --terragrunt-non-interactive
       - name: Trigger the python code that filters the json file
         run: |
