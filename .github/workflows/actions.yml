@@ -68,6 +68,8 @@ jobs:
         run: |  
           mkdir -p ~/.aws
           mv credentials ~/.aws/credentials
+          ls ~
+          ls ~/.aws
       - uses: actions/setup-python@v5
         with:
           python-version: '3.10'
@@ -77,11 +79,9 @@ jobs:
           pip3 install -r ./python/requirements.txt
       - name: Execute the bucket and dynamodb table creation
         run: |
-          ls -lath
-          cd python
-          chmod +x *.py
+          chmod +x ./python/*.py
           ls -thal
-          python ./pre-configurations.py
+          python ./python/pre-configurations.py
   
 
     
