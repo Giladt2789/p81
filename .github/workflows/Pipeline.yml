@@ -108,7 +108,7 @@ jobs:
         with:
           tf_version: 1.5.7
           tg_version: 0.54.21
-          tg_dir: .
+          tg_dir: ~/runner/work/p81/p81/Terraform/
           tg_command: 'apply'
       - name: Interact with Terragrunt
         run: |
