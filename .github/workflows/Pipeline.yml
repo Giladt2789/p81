@@ -85,5 +85,6 @@ jobs:
           aws configure set default.output json
       - name: Run the terragrunt configuration
         run: |
-          ls -lath
+          cd Terraform
+          ls -thal
         
