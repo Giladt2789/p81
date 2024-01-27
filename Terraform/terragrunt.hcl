@@ -15,7 +15,7 @@ remote_state {
 }
 
 terraform {
-  extra_arguments {
+  extra_arguments "globals tfvars" {
     required_var_files = ["globals.tfvars"]
   }
 }
