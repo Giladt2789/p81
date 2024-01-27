@@ -66,6 +66,7 @@ jobs:
           name: aws-credentials
       - name: Move the cred file to its location
         run: |  
+          pwd
           mkdir -p ~/.aws
           mv credentials ~/.aws/credentials
           ls ~
