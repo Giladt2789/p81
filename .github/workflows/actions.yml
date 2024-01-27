@@ -27,6 +27,11 @@ jobs:
         echo "[${{inputs.profile_name}}]" > ~/.aws/credentials &&
         echo "aws_access_key_id=${{ env.AWS_ACCESS_KEY_ID }}" >> ~/.aws/credentials &&
         echo "aws_secret_access_key=${{ env.AWS_SECRET_ACCESS_KEY }}" >> ~/.aws/credentials
+    - name: Upload credentials artifact  
+      uses: actions/upload-artifact@v3
+      with:
+        name: aws-credentials
+        path: .aws/credentials
     - name: Install Terraform 1.5.7
       run: |
         wget -q https://releases.hashicorp.com/terraform/1.5.7/terraform_1.5.7_linux_amd64.zip
@@ -52,6 +57,10 @@ jobs:
     needs: pre-configurations
     steps:
       - uses: actions/checkout@v4
+      - name: Download credentials artifact
+        uses: actions/download-artifact@v3
+        with: 
+          name: aws-credentials
       - uses: actions/setup-python@v5
         with:
           python-version: '3.10'
