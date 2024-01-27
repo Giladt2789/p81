@@ -11,6 +11,8 @@ env:
   STATEFILE_LOCK_TABLE: p81-gilad-statefile-locks-table
   ACCOUNT_NUMBER: 329082085800
   IAM_USER_NAME: gilad-tayeb
+  TASK_BUCKET_NAME: gilad-assignment-jan-2024
+  ORIGIN_ID: jsonOrigin
 
 jobs:
 
@@ -83,8 +85,14 @@ jobs:
           aws configure set aws_secret_access_key ${{ secrets.AWS_SECRET_ACCESS_KEY }}
           aws configure set default.region eu-central-1
           aws configure set default.output json
-      - name: Run the terragrunt configuration
+      - name: Input env. variables into global.tfvars and use them in terragrunt deployment
         run: |
           cd Terraform
           ls -thal
+          echo "region = \"$REGION\"" > globals.tfvars
+          echo "aws_profile = \"$AWS_PROFILE\"" >> globals.tfvars
+          echo "bucket_name = \"$TASK_BUCKET_NAME\"" >> globals.tfvars
+          echo "origin_id = \"$ORIGIN_ID\"" >> globals.tfvars
+          cat globals.tfvars
+#          terragrunt apply --auto-approve --terragrunt-non-interactive
         
