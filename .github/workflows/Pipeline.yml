@@ -17,7 +17,7 @@ jobs:
   install:
     runs-on: ubuntu-latest
     steps:
-    - uses: actions/checkout@v3
+    - uses: actions/checkout@v4
     - name: Install Python
       uses: actions/setup-python@v4
       with:
@@ -25,7 +25,7 @@ jobs:
         cache: 'pip'
 
 
-  run-code:
+  pre-requisites:
     needs: install
     runs-on: ubuntu-latest
 
@@ -70,8 +70,16 @@ jobs:
         sudo mv terragrunt /usr/bin
         terragrunt --version
         terraform --version
-        ls -thal
-    - name: Run the terragrunt configuration
-      run: |
-        echo "hello"
+
+  Terraform_code:
+    needs: pre-requisites
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Run the terragrunt configuration
+        run: |
+          python --version
+          terraform --version
+          terragrunt --version
+          aws configure list
         
