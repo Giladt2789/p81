@@ -3,13 +3,17 @@ import json
 import os
 
 region = os.environ['REGION']
+print(region)
 bucket_name = os.environ['BUCKET']
+print(bucket_name)
 profile_name = os.environ['PROFILE_NAME']
+print(profile_name)
 table_name = os.environ['STATEFILE_LOCK_TABLE']
+print(table_name)
 account_number = os.environ['ACCOUNT_NUMBER']
+print(account_number)
 iam_user_name = os.environ['IAM_USER_NAME']
-message = f"Region: {region}, bucket_name: {bucket_name}, profile_name: {profile_name}, table_name: {table_name}, account_number: {account_number}, iam_user_name: {iam_user_name}"
-print(message)
+print(iam_user_name)
 # General attributes for the S3 bucket and the dynamodb table (for the state file)
 aws_session = boto3.session.Session(region_name=region, profile_name=profile_name)
 s3_client = aws_session.client('s3')
