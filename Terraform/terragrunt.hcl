@@ -13,8 +13,3 @@ remote_state {
     dynamodb_table = get_env("STATEFILE_LOCK_TABLE")
   }
 }
-
-terraform {
-  source = "provider.tf"
-  terraform_binary_constraints = ""
-}
