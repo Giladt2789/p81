@@ -6,7 +6,7 @@ on:
 
 env:
   REGION: eu-central-1
-  BUCKET: p81-gilad-state-files-bucket
+  STATE_FILES_BUCKET: p81-gilad-state-files-bucket
   PROFILE_NAME: default
   STATEFILE_LOCK_TABLE: p81-gilad-statefile-locks-table
   ACCOUNT_NUMBER: 329082085800
