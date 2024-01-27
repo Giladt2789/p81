@@ -103,6 +103,9 @@ jobs:
 #        with:
 #          terragrunt_version: 0.54.21
 #          token: ${{ secrets.GITHUB_TOKEN }}
+      - name: Setting AWS env. vars.
+        run: |
+          printenv
       - name: Deploy
         uses: gruntwork-io/terragrunt-action@v2
         with:
