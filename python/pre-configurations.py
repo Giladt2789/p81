@@ -12,7 +12,9 @@ iam_user_name = os.getenv('IAM_USER_NAME')
 aws_session = boto3.session.Session(region_name=region, profile_name=profile_name)
 s3_client = aws_session.client('s3')
 dynamodb_client = aws_session.client('dynamodb')
-if s3_client.head_bucket(Bucket=bucket_name) is None:
+try:
+    s3_client.head_bucket(Bucket=bucket_name)
+except Exception as s3_ex:
     bucket_creation_response = s3_client.create_bucket(
         Bucket=bucket_name,
         CreateBucketConfiguration={
@@ -55,9 +57,10 @@ if s3_client.head_bucket(Bucket=bucket_name) is None:
             ]
         })
     )
-else:
-    print("Bucket exists, no need to create the bucket again. Moving on to check if the DynamoDB table exists")
-if dynamodb_client.describe_table(TableName=table_name) is None:
+print("Bucket exists or was created")
+try:
+    dynamodb_client.describe_table(TableName=table_name)
+except Exception as ddb_ex:
     dynamodb_table_creation_response = dynamodb_client.create_table(
         TableName=table_name,
         AttributeDefinitions=[
@@ -74,5 +77,5 @@ if dynamodb_client.describe_table(TableName=table_name) is None:
         ],
         BillingMode='PAY_PER_REQUEST'
     )
-else:
-    print("DynamoDB table exists, no need to create table.")
+print("DynamoDB table exists or was created")
+
