@@ -108,7 +108,8 @@ jobs:
         with:
           tf_version: 1.5.7
           tg_version: 0.54.21
-          tg_dir: $GITHUB_WORKSPACE/Terraform/
+          tg_dir: /github/workspace/Terraform/
+#          tg_dir: $GITHUB_WORKSPACE/Terraform/
           tg_command: 'apply'
       - name: Interact with Terragrunt
         run: |
