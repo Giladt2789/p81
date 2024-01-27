@@ -31,7 +31,7 @@ jobs:
       uses: actions/upload-artifact@v3
       with:
         name: aws-credentials
-        path: .aws/credentials
+        path: ~/.aws/credentials
     - name: Install Terraform 1.5.7
       run: |
         wget -q https://releases.hashicorp.com/terraform/1.5.7/terraform_1.5.7_linux_amd64.zip
