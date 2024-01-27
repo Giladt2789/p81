@@ -28,20 +28,39 @@ jobs:
   run-code:
     needs: install
     runs-on: ubuntu-latest
+    env:
+      REGION: eu-central-1
+      BUCKET: p81-gilad-state-files-bucket
+      PROFILE_NAME: default
+      STATEFILE_LOCK_TABLE: p81-gilad-statefile-locks-table
+      ACCOUNT_NUMBER: 329082085800
+      IAM_USER_NAME: gilad-tayeb
     steps:
     - uses: actions/checkout@v4
     - name: Clean existing AWS CLI
       run: |
         sudo rm -rf /usr/local/aws-cli*
-    - name: Install AWS CLI
-      run: | 
-        curl "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip" -o "awscliv2.zip" > /dev/null
-        unzip awscliv2.zip > /dev/null
-        sudo ./aws/install > /dev/null
-        mkdir -p ~/.aws &&
-        echo "[${{inputs.profile_name}}]" > ~/.aws/credentials &&
-        echo "aws_access_key_id=${{ env.AWS_ACCESS_KEY_ID }}" >> ~/.aws/credentials &&
-        echo "aws_secret_access_key=${{ env.AWS_SECRET_ACCESS_KEY }}" >> ~/.aws/credentials
+#    - name: Install AWS CLI
+#      run: |
+#        curl "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip" -o "awscliv2.zip" > /dev/null
+#        unzip awscliv2.zip > /dev/null
+#        sudo ./aws/install > /dev/null
+#        mkdir -p ~/.aws &&
+#        echo "[${{inputs.profile_name}}]" > ~/.aws/credentials &&
+#        echo "aws_access_key_id=${{ env.AWS_ACCESS_KEY_ID }}" >> ~/.aws/credentials &&
+#        echo "aws_secret_access_key=${{ env.AWS_SECRET_ACCESS_KEY }}" >> ~/.aws/credentials
+    - name: Configure AWS credentials
+      uses: aws-actions/configure-aws-credentials@v1
+      with:
+        aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+        aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+        aws-region: eu-central-1
+    - name: Configure AWS CLI
+      run: |
+        aws configure set aws_access_key_id ${{ secrets.AWS_ACCESS_KEY_ID }}
+        aws configure set aws_secret_access_key ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+        aws configure set default.region eu-central-1
+        aws configure set default.output json
     - name: Install dependencies
       run: |
         ls -thal ~/.aws/
@@ -56,4 +75,4 @@ jobs:
         export STATEFILE_LOCK_TABLE="p81-gilad-statefile-locks-table"
         export ACCOUNT_NUMBER="329082085800"
         export IAM_USER_NAME="gilad-tayeb"
-        python ./python/pre-configurations.py
+        python ./python/test.py
