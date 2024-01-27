@@ -68,23 +68,6 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      - name: Install Terraform
-        uses: hashicorp/setup-terraform@v2
-        with:
-          terraform_version: 1.5.7
-          terraform_wrapper: true
-      - name: Setup Terraform version
-        run: terraform --version
-      - name: Setup Terraform wrapper path
-        run: which terraform
-      - name: Setup Terragrunt
-        uses: autero1/action-terragrunt@v1.1.0
-        with:
-          terragrunt_version: 0.54.21
-          token: ${{ secrets.GITHUB_TOKEN }}
-      - name: Interact with Terragrunt
-        run: |
-          terragrunt --version
 #      - name: Install Terragrunt
 #        run: |
 #          wget -O - https://github.com/gruntwork-io/terragrunt/releases/download/v0.54.21/terragrunt_linux_amd64 > terragrunt
@@ -103,10 +86,28 @@ jobs:
           echo "aws_profile = \"$PROFILE_NAME\"" >> globals.tfvars
           echo "bucket_name = \"$TASK_BUCKET_NAME\"" >> globals.tfvars
           echo "origin_id = \"$ORIGIN_ID\"" >> globals.tfvars
-      - name: Trigger the terragrunt deployment
+      - name: Install Terraform
+        uses: hashicorp/setup-terraform@v2
+        with:
+          terraform_version: 1.5.7
+          terraform_wrapper: true
+      - name: Setup Terraform version
+        run: terraform --version
+      - name: Setup Terraform wrapper path
+        run: which terraform
+      - name: Setup Terragrunt
+        uses: autero1/action-terragrunt@v1.1.0
+        with:
+          terragrunt_version: 0.54.21
+          token: ${{ secrets.GITHUB_TOKEN }}
+      - name: Interact with Terragrunt
         run: |
+          terragrunt --version
           cd ./Terraform
           pwd
+          ls -lah
+      - name: Trigger the terragrunt deployment
+        run: |
           terragrunt apply --auto-approve --terragrunt-non-interactive
       - name: Trigger the python code that filters the json file
         run: |
