@@ -28,7 +28,9 @@ class Assignment:
         bucket_upload = self.client.put_object(
             Bucket=self.bucket_name,
             Body=json.dumps(read_data),
-            Key="final_catalog.json"
+            Key="final_catalog.json",
+            ContentType='application/json',
+            ContentDisposition='attachment; filename=final_catalog.json'
         )
 
 

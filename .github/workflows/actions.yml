@@ -25,7 +25,7 @@ jobs:
     - name: Clean existing AWS CLI
       run: |
         sudo rm -rf /usr/local/aws-cli*
-    - name: Install AWS CLI from
+    - name: Install AWS CLI from web
       run: |
         curl "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip" -o "awscliv2.zip" > /dev/null
         unzip awscliv2.zip > /dev/null
