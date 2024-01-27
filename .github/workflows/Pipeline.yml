@@ -68,11 +68,6 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-#      - name: Install Terragrunt
-#        run: |
-#          wget -O - https://github.com/gruntwork-io/terragrunt/releases/download/v0.54.21/terragrunt_linux_amd64 > terragrunt
-#          chmod +x terragrunt
-#          sudo mv terragrunt /usr/bin
       - name: Configure AWS credentials
         uses: aws-actions/configure-aws-credentials@v1
         with:
@@ -92,6 +87,7 @@ jobs:
           echo "aws_profile = \"$PROFILE_NAME\"" >> globals.tfvars
           echo "bucket_name = \"$TASK_BUCKET_NAME\"" >> globals.tfvars
           echo "origin_id = \"$ORIGIN_ID\"" >> globals.tfvars
+          cat globals.tfvars
       - name: Install Terraform
         uses: hashicorp/setup-terraform@v2
         with:
@@ -103,12 +99,6 @@ jobs:
         run: |
           which terraform
           pwd
-#          echo "$GITHUB_WORKSPACE/terraform" >> $GITHUB_PATH
-#      - name: Setup Terragrunt
-#        uses: autero1/action-terragrunt@v1.1.0
-#        with:
-#          terragrunt_version: 0.54.21
-#          token: ${{ secrets.GITHUB_TOKEN }}
       - name: Setting AWS env. vars.
         run: |
           printenv
@@ -118,7 +108,6 @@ jobs:
           tf_version: 1.5.7
           tg_version: 0.54.21
           tg_dir: /github/workspace/Terraform/
-#          tg_dir: $GITHUB_WORKSPACE/Terraform/
           tg_command: 'apply'
       - name: Interact with Terragrunt
         run: |
