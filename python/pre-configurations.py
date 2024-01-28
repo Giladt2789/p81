@@ -3,6 +3,7 @@ import json
 import os
 
 region = os.getenv('INPUT_REGION')
+print(f'region: {region} of type {type(region)}')
 bucket_name = os.getenv('INPUT_STATE_FILES_BUCKET')
 profile_name = os.getenv('INPUT_PROFILE_NAME')
 table_name = os.getenv('INPUT_STATEFILE_LOCK_TABLE')
