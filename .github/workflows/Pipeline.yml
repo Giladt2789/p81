@@ -90,6 +90,7 @@ jobs:
         pip install -r ./python/requirements.txt
     - name: Run Python script
       run: |
+        printenv
         python ./python/pre-configurations.py
 
 
