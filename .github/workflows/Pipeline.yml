@@ -88,6 +88,7 @@ jobs:
           echo "bucket_name = \"$TASK_BUCKET_NAME\"" >> globals.tfvars
           echo "origin_id = \"$ORIGIN_ID\"" >> globals.tfvars
           cat globals.tfvars
+          aws configure list
       - name: Install Terraform
         uses: hashicorp/setup-terraform@v2
         with:
