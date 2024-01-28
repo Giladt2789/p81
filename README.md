@@ -47,3 +47,9 @@ First we'll empty the task bucket (in order to be able to remove the bucket usin
 Second, we'll destroy the infrastructure using terragrunt.
 At the end, we'll remove the state file bucket and the dynamodb table using boto3 SDK. That will be the end of the destroy option.<br>
 Hope you enjoyed reading and reviewing the task solution
+
+<h3>Resources and documentations i've used in the process</h3><br>
+Github Actions Docs: https://docs.github.com/en/actions
+Boto3 docs: https://boto3.amazonaws.com/v1/documentation/api/latest/index.html
+Terragrunt docs: https://terragrunt.gruntwork.io/docs/
+Terraform registry: https://registry.terraform.io/
