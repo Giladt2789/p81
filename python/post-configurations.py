@@ -20,7 +20,7 @@ if versioning == 'Enabled':
         while versions:
             # Delete bucket versions
             delete_keys = []
-            for v in versions:
+            for v in versions['Versions']:
                 dict = {}
                 dict['Key'] = v['Key']
                 dict['VersionId'] = v['VersionId']
