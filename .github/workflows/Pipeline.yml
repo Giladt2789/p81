@@ -152,7 +152,7 @@ jobs:
           tf_version: 1.5.7
           tg_version: 0.54.21
           tg_dir: /github/workspace/Terraform/
-          tg_command: $FLAG
+          tg_command: ${{ env.FLAG }}
       - name: Print cloudfront distribution url
         run: |
           cd ./Terraform/modules/cloudfront/
