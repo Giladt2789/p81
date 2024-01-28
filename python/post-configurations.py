@@ -1,10 +1,10 @@
 import boto3
 import sys
 
-region = sys.argv[1]
-bucket_name = sys.argv[2]
-profile_name = sys.argv[3]
-table_name = sys.argv[4]
+region = 'eu-central-1'
+bucket_name = 'p81-gilad-state-files-bucket'
+profile_name = 'default'
+table_name = 'p81-gilad-statefile-locks-table'
 
 
 aws_session = boto3.session.Session(region_name=region, profile_name=profile_name)
@@ -48,4 +48,4 @@ delete_table = dynamodb_client.delete_table(TableName=table_name)
 
 # Wait until the table is deleted
 waiter = dynamodb_client.get_waiter('table_not_exists')
-waiter.wait(TableName='p81-gilad-statefile-locks-table')
+waiter.wait(TableName=table_name)
