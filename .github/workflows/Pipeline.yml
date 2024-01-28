@@ -53,7 +53,7 @@ jobs:
         aws configure set aws_secret_access_key ${{ secrets.AWS_SECRET_ACCESS_KEY }}
         aws configure set default.region ${{ env.REGION }}
         aws configure set default.output json
-        which aws
+        which aws 
     - name: Install dependencies
       run: |
         ls -thal ~/.aws/
@@ -106,6 +106,7 @@ jobs:
         run: |
           which terraform
           pwd
+          which aws
       - name: Deploy
         uses: gruntwork-io/terragrunt-action@v2
         with:
