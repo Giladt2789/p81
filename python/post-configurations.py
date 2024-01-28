@@ -1,10 +1,10 @@
 import boto3
 import sys
 
-region = 'eu-central-1'
-bucket_name = 'p81-gilad-state-files-bucket'
-profile_name = 'default'
-table_name = 'p81-gilad-statefile-locks-table'
+region = sys.argv[1]
+bucket_name = sys.argv[2]
+profile_name = sys.argv[3]
+table_name = sys.argv[4]
 
 
 aws_session = boto3.session.Session(region_name=region, profile_name=profile_name)

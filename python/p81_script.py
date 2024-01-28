@@ -47,6 +47,7 @@ class Assignment:
             print("Invalid JSON format")
 
     def empty_bucket(self):
+
         # Delete bucket versions
         versions = self.client.list_object_versions(Bucket=self.bucket_name)
         if 'Versions' in versions:
@@ -59,6 +60,13 @@ class Assignment:
                     dict['VersionId'] = v['VersionId']
                     delete_keys.append(dict)
                 self.client.delete_objects(Bucket=self.bucket_name, Delete={'Objects': delete_keys})
+    def check_if_exists(self):
+        try:
+            response = self.client.head_bucket(Bucket=self.bucket_name)
+            return True
+        except ClientError as e:
+            print(f'Bucket {bucket_name} does not exist')
+            return False
 
 
 
@@ -74,4 +82,6 @@ if not args.destroy:
     obj.upload_filtered_products_to_s3()
     obj.download_filtered_json()
 else:
-    obj.empty_bucket()
+    is_bucket_exists = obj.check_if_exists()
+    if is_bucket_exists:
+        obj.empty_bucket()
