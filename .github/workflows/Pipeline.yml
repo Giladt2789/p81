@@ -117,5 +117,5 @@ jobs:
       - name: Trigger the python code that filters the json file
         run: |
           cd ./python
-          python ./python/p81_script.py --region $REGION --bucket $TASK_BUCKET_NAME
+          python ./p81_script.py --region $REGION --bucket $TASK_BUCKET_NAME
           
