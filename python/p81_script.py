@@ -2,6 +2,7 @@ import json
 import boto3
 import requests
 import argparse
+from botocore.exceptions import ClientError
 
 
 class Assignment:
@@ -64,9 +65,10 @@ class Assignment:
         try:
             response = self.client.head_bucket(Bucket=self.bucket_name)
             return True
-        except ClientError as e:
-            print(f'Bucket {bucket_name} does not exist')
-            return False
+        except ClientError as ex:
+            if ex.response['Error']['Message'] == 'Not Found':
+                print(f'Bucket {self.bucket_name} does not exist')
+                return False
 
 
 
