@@ -114,13 +114,6 @@ jobs:
           tg_version: 0.54.21
           tg_dir: /github/workspace/Terraform/
           tg_command: 'apply'
-      - name: Interact with Terragrunt
-        run: |
-          terragrunt --version
-          cd ./Terraform
-          pwd
-          ls -lah
-#          terragrunt apply --auto-approve --terragrunt-non-interactive
       - name: Trigger the python code that filters the json file
         run: |
           cd ../python
