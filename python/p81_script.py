@@ -59,7 +59,7 @@ class Assignment:
                     dict['VersionId'] = v['VersionId']
                     delete_keys.append(dict)
                 self.client.delete_objects(Bucket=self.bucket_name, Delete={'Objects': delete_keys})
-                versions = self.client.list_object_versions(Bucket=self.bucket_name)['Versions']
+
 
 
 parser = argparse.ArgumentParser(description='Operations on the storage bucket ')
