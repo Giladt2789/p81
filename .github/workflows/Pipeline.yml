@@ -116,9 +116,6 @@ jobs:
           tg_command: 'apply'
       - name: Trigger the python code that filters the json file
         run: |
-          ls
-          pwd
-          cd ../python
-          ls
-          # python ./python/p81_script.py --region $REGION --bucket $TASK_BUCKET_NAME
+          cd ./python
+          python ./python/p81_script.py --region $REGION --bucket $TASK_BUCKET_NAME
           
