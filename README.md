@@ -29,4 +29,9 @@ In the process of solving this home assignment, i've made some assumptions and t
     * Statefile_Lock_Table - in order to track the lock status, a DynamoDB table must be created.
     * Account_Number - the AWS account number (provided by Perimeter 81 team)
     * IAM_User_Name - the IAM user name (provided by Perimeter 81 team)
-    * 
+    * Task_Bucket_Name - the bucket name that will store the final json file
+    * Origin_id - a name for the origin id (i used it to define a name for the cloudfront origin)
+    * Action - this part is my overthinking:<br>
+      * If i want to execture the assignment mission - i provide the keyword "create".<br> 
+      * If i want to destroy the infrastructure, for whatever reason - i provide the keyword "destroy". 
+3. 
