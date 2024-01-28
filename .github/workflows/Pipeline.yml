@@ -1,8 +1,8 @@
 name: Github Actions pipeline testing
 
 on:
-  push:
-    branches: [ main ]
+#  push:
+#    branches: [ main ]
   workflow_dispatch:
     inputs:
       REGION:
@@ -75,7 +75,7 @@ jobs:
       with:
         aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
         aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-        aws-region: "${{ github.event.inputs.REGION }}"
+        aws-region: ${{ github.event.inputs.REGION }}
     - name: Configure AWS CLI
       run: |
         aws configure set aws_access_key_id ${{ secrets.AWS_ACCESS_KEY_ID }}
