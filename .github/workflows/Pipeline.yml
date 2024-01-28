@@ -70,12 +70,12 @@ jobs:
       with:
         aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
         aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-        aws-region: ${{ env.REGION }}
+        aws-region: "${{ github.event.inputs.REGION }}"
     - name: Configure AWS CLI
       run: |
         aws configure set aws_access_key_id ${{ secrets.AWS_ACCESS_KEY_ID }}
         aws configure set aws_secret_access_key ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-        aws configure set default.region ${{ env.REGION }}
+        aws configure set default.region ${{ inputs.REGION }}
         aws configure set default.output json
         which aws 
     - name: Install dependencies
@@ -98,20 +98,20 @@ jobs:
         with:
           aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
           aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-          aws-region: ${{ env.REGION }}
+          aws-region: "${{ github.event.inputs.REGION }}"
       - name: Configure AWS CLI
         run: |
           aws configure set --profile default aws_access_key_id ${{ secrets.AWS_ACCESS_KEY_ID }}
           aws configure set --profile default aws_secret_access_key ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-          aws configure set --profile default default.region ${{ env.REGION }}
+          aws configure set --profile default default.region ${{ github.event.inputs.REGION }}
           aws configure set --profile default default.output json
       - name: Input env. variables into global.tfvars in order to use them in deployment
         run: |
           cd Terraform
-          echo "region = \"$REGION\"" > globals.tfvars
-          echo "aws_profile = \"$PROFILE_NAME\"" >> globals.tfvars
-          echo "bucket_name = \"$TASK_BUCKET_NAME\"" >> globals.tfvars
-          echo "origin_id = \"$ORIGIN_ID\"" >> globals.tfvars
+          echo 'region = "${{ github.event.inputs.REGION }}"' > globals.tfvars
+          echo 'aws_profile = "${{ github.event.inputs.PROFILE }}"' >> globals.tfvars
+          echo 'bucket_name = "${{ github.event.inputs.TASK_BUCKET_NAME }}"' >> globals.tfvars
+          echo 'origin_id = "${{ github.event.inputs.ORIGIN_ID }}"' >> globals.tfvars
           cat globals.tfvars
       - name: Create AWS config file
         run: |
