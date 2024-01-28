@@ -26,7 +26,6 @@ if versioning == 'Enabled':
                 dict['VersionId'] = v['VersionId']
                 delete_keys.append(dict)
             s3_client.delete_objects(Bucket=bucket_name, Delete={'Objects': delete_keys})
-            versions = s3_client.list_object_versions(Bucket=bucket_name)['Versions']
 
 # Empty bucket
 objects = []
