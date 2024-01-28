@@ -53,7 +53,7 @@ jobs:
         aws configure set aws_secret_access_key ${{ secrets.AWS_SECRET_ACCESS_KEY }}
         aws configure set default.region ${{ env.REGION }}
         aws configure set default.output json
-        ls ~/github/workspace/.aws
+        which aws
     - name: Install dependencies
       run: |
         ls -thal ~/.aws/
