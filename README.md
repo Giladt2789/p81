@@ -41,4 +41,6 @@ The overall flow goes as such:
 First i'm creating (using boto3 SDK) the statefile bucket and dynamodb table for LockID <br>
 Then i'm triggering the terragrunt action in order to deploy the infrastructure.<br>
 Afterwards, i'm triggering my python code to filter, parse and upload the final json file to the deployed bucket. <br>
-Finally
+In the later step i'm also checking if the final json file (that was uploaded after parsing and downloaded as final_catalog) is indeed a json file or not (as requested in the task)<br>
+If we'll choose to go via the destroy option - we'd be doing the following:
+First we'll 
