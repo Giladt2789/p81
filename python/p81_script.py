@@ -46,15 +46,31 @@ class Assignment:
         except ValueError as ex:
             print("Invalid JSON format")
 
+    def empty_bucket(self):
+        # Delete bucket versions
+        versions = self.client.list_object_versions(Bucket=self.bucket_name)['Versions']
+        while versions:
+            # Delete bucket versions
+            delete_keys = [{'Key': v['Key'], 'VersionId': v['VersionId']} for v in versions]
+            self.client.delete_objects(Bucket=self.bucket_name, Delete={'Objects': delete_keys})
+            versions = self.client.list_object_versions(Bucket=self.bucket_name)['Versions']
+        # Empty bucket from files
+        objects = [{'Key': obj['Key']} for obj in
+                   self.client.list_objects(Bucket=self.bucket_name)['Contents']]
+        self.client.delete_objects(Bucket=self.bucket_name, Delete={'Objects': objects})
 
 
 
 parser = argparse.ArgumentParser(description='Upload filtered products list to s3')
 parser.add_argument('--bucket', type=str, required=True, help='Name of bucket created in terraform')
 parser.add_argument('--region', type=str, required=True, help='AWS region name')
+parser.add_argument('--destroy', type=str, required=False, help='Destroy the bucket before complete clean up')
 args = parser.parse_args()
 
 obj = Assignment(bucket_name=args.bucket, region=args.region)
-obj.save_filtered_products_by_price()
-obj.upload_filtered_products_to_s3()
-obj.download_filtered_json()
+if not args.destroy:
+    obj.save_filtered_products_by_price()
+    obj.upload_filtered_products_to_s3()
+    obj.download_filtered_json()
+else:
+    obj.empty_bucket()
