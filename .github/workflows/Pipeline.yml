@@ -36,16 +36,6 @@ on:
         description: 'For internal uses, can create/destroy the infrastructure'
         required: true
         
-env:
-  REGION: eu-central-1
-  STATE_FILES_BUCKET: p81-gilad-state-files-bucket
-  PROFILE_NAME: default
-  STATEFILE_LOCK_TABLE: p81-gilad-statefile-locks-table
-  ACCOUNT_NUMBER: 329082085800
-  IAM_USER_NAME: gilad-tayeb
-  TASK_BUCKET_NAME: gilad-assignment-jan-2024
-  ORIGIN_ID: jsonOrigin
-
 jobs:
   install:
     runs-on: ubuntu-latest
