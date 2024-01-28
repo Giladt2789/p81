@@ -146,8 +146,8 @@ jobs:
           fi
       - name: Deploy or remove infrastructure - depenend on the action flag
         uses: gruntwork-io/terragrunt-action@v2
-        env:
-          FLAG: ${{ env.FLAG }}
+#        env:
+#          FLAG: ${{ env.FLAG }}
         with:
           tf_version: 1.5.7
           tg_version: 0.54.21
