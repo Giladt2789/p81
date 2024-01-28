@@ -90,8 +90,9 @@ jobs:
         pip install -r ./python/requirements.txt
     - name: Run Python script
       run: |
-        python ./python/pre-configurations.py ${{ github.event.inputs.REGION }} ${{ github.event.inputs.STATE_FILES_BUCKET }} ${{ github.event.inputs.PROFILE_NAME }} ${{ github.event.inputs.STATEFILE_LOCK_TABLE }} ${{ github.event.inputs.ACCOUNT_NUMBER }} ${{ github.event.inputs.IAM_USER_NAME }}
-
+        if [[ "${{  github.event.inputs.ACTION }}" == "create" ]]; then
+          python ./python/pre-configurations.py ${{ github.event.inputs.REGION }} ${{ github.event.inputs.STATE_FILES_BUCKET }} ${{ github.event.inputs.PROFILE_NAME }} ${{ github.event.inputs.STATEFILE_LOCK_TABLE }} ${{ github.event.inputs.ACCOUNT_NUMBER }} ${{ github.event.inputs.IAM_USER_NAME }}
+        fi
 
   terraform_code:
     needs: pre-requisites
@@ -136,13 +137,22 @@ jobs:
           which terraform
           pwd
           which aws
-      - name: Deploy
+      - name: Pre-assign the terragrunt flag to apply/destroy
+        run: |
+          if [[ "${{ github.event.inputs.ACTION }}" == "create" ]]; then
+            echo "FLAG=apply" >> $GITHUB_ENV
+          else
+            echo "FLAG=destroy" >> $GITHUB_ENV
+          fi
+      - name: Deploy or remove infrastructure - depenend on the action flag
         uses: gruntwork-io/terragrunt-action@v2
+        env:
+          FLAG: ${{ env.FLAG }}
         with:
           tf_version: 1.5.7
           tg_version: 0.54.21
           tg_dir: /github/workspace/Terraform/
-          tg_command: 'apply'
+          tg_command: $FLAG
       - name: Print cloudfront distribution url
         run: |
           cd ./Terraform/modules/cloudfront/

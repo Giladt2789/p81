@@ -4,7 +4,6 @@ import os
 import sys
 
 region = sys.argv[1]
-print(f'region: {region} of type {type(region)}')
 bucket_name = sys.argv[2]
 profile_name = sys.argv[3]
 table_name = sys.argv[4]
