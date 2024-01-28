@@ -37,3 +37,8 @@ In the process of solving this home assignment, i've made some assumptions and t
 3. In order not to over-complex the task, i didn't used a self-hosted runner for github (it wasn't the assignment to create that machine).<br>
 If i was to create that machine - many steps would have been avoided.
 
+The overall flow goes as such:
+First i'm creating (using boto3 SDK) the statefile bucket and dynamodb table for LockID <br>
+Then i'm triggering the terragrunt action in order to deploy the infrastructure.<br>
+Afterwards, i'm triggering my python code to filter, parse and upload the final json file to the deployed bucket. <br>
+Finally
