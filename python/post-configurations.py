@@ -19,7 +19,13 @@ if versioning == 'Enabled':
     if 'Versions' in versions:
         while versions:
             # Delete bucket versions
-            delete_keys = [{'Key': v['Key'], 'VersionId': v['VersionId']} for v in versions]
+            delete_keys = []
+            for v in versions:
+                dict = {}
+                dict['Key'] = v['Key']
+                dict['VersionId'] = v['VersionId']
+                delete_keys.append(dict)
+            # delete_keys = [{'Key': v['Key'], 'VersionId': v['VersionId']} for v in versions]
             s3_client.delete_objects(Bucket=bucket_name, Delete={'Objects': delete_keys})
             versions = s3_client.list_object_versions(Bucket=bucket_name)['Versions']
 
