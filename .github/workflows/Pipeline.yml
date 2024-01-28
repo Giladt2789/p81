@@ -157,7 +157,7 @@ jobs:
           tg_command: ${{ env.FLAG }}
       - name: Print cloudfront distribution url
         run: |
-          if [[ "${ github.event.inputs.ACTION }}" == "create" ]]; then
+          if [[ "${{ github.event.inputs.ACTION }}" == "create" ]]; then
             cd ./Terraform/modules/cloudfront/
             cat cloudfront_domain.txt
           fi
