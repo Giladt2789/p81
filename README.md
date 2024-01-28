@@ -34,4 +34,6 @@ In the process of solving this home assignment, i've made some assumptions and t
     * Action - this part is my overthinking:<br>
       * If i want to execture the assignment mission - i provide the keyword "create".<br> 
       * If i want to destroy the infrastructure, for whatever reason - i provide the keyword "destroy". 
-3. 
+3. In order not to over-complex the task, i didn't used a self-hosted runner for github (it wasn't the assignment to create that machine).<br>
+If i was to create that machine - many steps would have been avoided.
+
