@@ -58,7 +58,7 @@ jobs:
         cache: 'pip'
     - name: Print input parameter
       run: | 
-        echo "The parameters are: ${{ toJSON(inputs) }}""
+        echo "The parameters are: ${{ toJSON(inputs) }}"
 
 
   pre-requisites:
