@@ -114,6 +114,10 @@ jobs:
           tg_version: 0.54.21
           tg_dir: /github/workspace/Terraform/
           tg_command: 'apply'
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r ./python/requirements.txt
       - name: Trigger the python code that filters the json file
         run: |
           cd ./python
