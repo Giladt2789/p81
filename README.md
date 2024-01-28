@@ -23,4 +23,10 @@ In the process of solving this home assignment, i've made some assumptions and t
 2.1. The AWS access key and secret are stored in the Github credentials, in order for them not to be printed in the console, or stored in the git repo. <br>
 2.2. In order to have the option to plug-and-play, input parameters are permitted in the <b>"Run workflow"</b> option under the Actions tab. <br>
 2.3. The input parameters that will be passed are:<br>
+    * Region - the AWS region to deploy the resources
+    * State_Files_Bucket - the buckets name to store the state files
+    * Profile_Name - in the AWS cli, i've used the profiles method to identify. For that reason, a name for that profile must be given.
+    * Statefile_Lock_Table - in order to track the lock status, a DynamoDB table must be created.
+    * Account_Number - the AWS account number (provided by Perimeter 81 team)
+    * IAM_User_Name - the IAM user name (provided by Perimeter 81 team)
     * 
