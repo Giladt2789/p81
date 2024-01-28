@@ -36,7 +36,7 @@ class Assignment:
 
     def download_filtered_json(self):
         with open('../Terraform/modules/cloudfront/cloudfront_domain.txt' , 'r') as file:
-            download_url = file.read()
+            download_url = "https://" + file.read()
             r = requests.get(download_url, allow_redirects=True)
         with open(self.file_name, 'wb') as file:
             file.write(r.content)
