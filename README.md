@@ -43,4 +43,7 @@ Then i'm triggering the terragrunt action in order to deploy the infrastructure.
 Afterwards, i'm triggering my python code to filter, parse and upload the final json file to the deployed bucket. <br>
 In the later step i'm also checking if the final json file (that was uploaded after parsing and downloaded as final_catalog) is indeed a json file or not (as requested in the task)<br>
 If we'll choose to go via the destroy option - we'd be doing the following:
-First we'll 
+First we'll empty the task bucket (in order to be able to remove the bucket using terragrunt. When a bucket has an object, even a version object - terragrunt can't delete that bucket)<br>
+Second, we'll destroy the infrastructure using terragrunt.
+At the end, we'll remove the state file bucket and the dynamodb table using boto3 SDK. That will be the end of the destroy option.<br>
+Hope you enjoyed reading and reviewing the task solution
