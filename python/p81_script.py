@@ -34,17 +34,17 @@ class Assignment:
             ContentDisposition='attachment; filename='+self.file_name
         )
 
-    # def download_filtered_json(self):
-    #     with open('../Terraform/modules/cloudfront/cloudfront_domain.txt' , 'r') as file:
-    #         download_url = file.read()
-    #     r = requests.get(download_url, allow_redirects=True)
-    #     with open(self.file_name, 'wb') as file:
-    #         file.write(r.content)
-    #     try:
-    #         json_data = json.load(open(self.file_name))
-    #         print("Valid JSON format")
-    #     except ValueError as ex:
-    #         print("Invalid JSON format")
+     def download_filtered_json(self):
+         with open('../Terraform/modules/cloudfront/cloudfront_domain.txt' , 'r') as file:
+             download_url = file.read()
+         r = requests.get(download_url, allow_redirects=True)
+         with open(self.file_name, 'wb') as file:
+             file.write(r.content)
+         try:
+             json_data = json.load(open(self.file_name))
+             print("Valid JSON format")
+         except ValueError as ex:
+             print("Invalid JSON format")
 
 
 
