@@ -39,7 +39,7 @@ on:
         default: 'jsonOrigin'
       ACTION:
         description: 'For internal uses, can create/destroy the infrastructure'
-        required: true
+        required: false
         
 jobs:
   install:
