@@ -1,15 +1,11 @@
 import boto3
 import sys
 
-# region = sys.argv[1]
-# bucket_name = sys.argv[2]
-# profile_name = sys.argv[3]
-# table_name = sys.argv[4]
+region = sys.argv[1]
+bucket_name = sys.argv[2]
+profile_name = sys.argv[3]
+table_name = sys.argv[4]
 
-region = 'eu-central-1'
-bucket_name = 'testing-remove-bucket-gilad'
-profile_name = 'default'
-table_name = 'p81-gilad-statefile-locks-table'
 
 aws_session = boto3.session.Session(region_name=region, profile_name=profile_name)
 s3_client = aws_session.client('s3')
