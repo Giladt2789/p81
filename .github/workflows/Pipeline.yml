@@ -186,5 +186,5 @@ jobs:
           if [[ "${{ github.event.inputs.ACTION }}" == "destroy" ]]; then
             pwd
             ls -la
-            python python/post_configurations.py ${{ github.event.inputs.REGION }} ${{ github.event.inputs.STATE_FILES_BUCKET }} ${{ github.event.inputs.PROFILE_NAME }} ${{ github.event.inputs.STATEFILE_LOCK_TABLE }}
+            python ./python/post_configurations.py ${{ github.event.inputs.REGION }} ${{ github.event.inputs.STATE_FILES_BUCKET }} ${{ github.event.inputs.PROFILE_NAME }} ${{ github.event.inputs.STATEFILE_LOCK_TABLE }}
           fi
