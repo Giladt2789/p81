@@ -88,7 +88,12 @@ jobs:
           echo "bucket_name = \"$TASK_BUCKET_NAME\"" >> globals.tfvars
           echo "origin_id = \"$ORIGIN_ID\"" >> globals.tfvars
           cat globals.tfvars
-          aws configure list
+      - name: Create AWS config file
+        run: |
+          mkdir -p ~/.aws
+          echo "[default]" > ~/.aws/credentials
+          echo "aws_access_key_id = ${{ secrets.AWS_ACCESS_KEY_ID }}" >> ~/.aws/credentials
+          echo "aws_secret_access_key = ${{ secrets.AWS_SECRET_ACCESS_KEY }}" >> ~/.aws/credentials
       - name: Install Terraform
         uses: hashicorp/setup-terraform@v2
         with:
