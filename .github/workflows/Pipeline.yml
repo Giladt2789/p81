@@ -146,8 +146,10 @@ jobs:
           fi
       - name: Deploy or remove infrastructure - depenend on the action flag
         uses: gruntwork-io/terragrunt-action@v2
-#        env:
-#          FLAG: ${{ env.FLAG }}
+        env:
+          STATE_FILES_BUCKET: ${{ github.event.inputs.STATE_FILES_BUCKET }}
+          REGION: ${{ github.event.inputs.REGION }}
+          STATEFILE_LOCK_TABLE: ${{ github.event.inputs.STATEFILE_LOCK_TABLE }}
         with:
           tf_version: 1.5.7
           tg_version: 0.54.21
