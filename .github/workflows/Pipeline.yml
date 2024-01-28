@@ -144,14 +144,14 @@ jobs:
           else
             echo "FLAG=destroy" >> $GITHUB_ENV
           fi
-#      - name: If destroy triggered, clean the storage bucket before destroy infrastructure
-#        run: |
-#          if [[ "${{ github.event.inputs.ACTION }}" == "destroy" ]]; then
-#            cd ./python
-#            python -m pip install --upgrade pip
-#            pip install -r ./requirements.txt
-#            python ./p81_script.py --region ${{ github.event.inputs.REGION }} --bucket ${{ github.event.inputs.TASK_BUCKET_NAME }} --destroy ${{ env.FLAG }}
-#          fi
+      - name: If destroy triggered, clean the storage bucket before destroy infrastructure
+        run: |
+          if [[ "${{ github.event.inputs.ACTION }}" == "destroy" ]]; then
+            cd ./python
+            python -m pip install --upgrade pip
+            pip install -r ./requirements.txt
+            python ./p81_script.py --region ${{ github.event.inputs.REGION }} --bucket ${{ github.event.inputs.TASK_BUCKET_NAME }} --destroy ${{ env.FLAG }}
+          fi
       - name: Deploy or remove infrastructure - depenend on the action flag
         uses: gruntwork-io/terragrunt-action@v2
         env:

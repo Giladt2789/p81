@@ -20,9 +20,9 @@ save it to new JSON with expected results.
 In the process of solving this home assignment, i've made some assumptions and taken some steps:<br>
 1. The bucket that would save the state file and the DynamoDB table that stores the LockID must get created via boto3 and not terraform. <br>
 2. The entire process must be a plug-and-play process. So, the things i've made to support it are:<br>
-2.1. The AWS access key and secret are stored in the Github credentials, in order for them not to be printed in the console, or stored in the git repo. <br>
-2.2. In order to have the option to plug-and-play, input parameters are permitted in the <b>"Run workflow"</b> option under the Actions tab. <br>
-2.3. The input parameters that will be passed are:<br>
+2.A. The AWS access key and secret are stored in the Github credentials, in order for them not to be printed in the console, or stored in the git repo. <br>
+2.B. In order to have the option to plug-and-play, input parameters are permitted in the <b>"Run workflow"</b> option under the Actions tab. <br>
+2.C. The input parameters that will be passed are:<br>
     * Region - the AWS region to deploy the resources<br>
     * State_Files_Bucket - the buckets name to store the state files<br>
     * Profile_Name - in the AWS cli, i've used the profiles method to identify. For that reason, a name for that profile must be given.<br>
@@ -53,3 +53,4 @@ Github Actions Docs: https://docs.github.com/en/actions<br>
 Boto3 docs: https://boto3.amazonaws.com/v1/documentation/api/latest/index.html<br>
 Terragrunt docs: https://terragrunt.gruntwork.io/docs/<br>
 Terraform registry: https://registry.terraform.io/<br>
+Github Actions Marketplace: https://github.com/marketplace?type=actions <br>
