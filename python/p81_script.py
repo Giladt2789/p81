@@ -48,17 +48,18 @@ class Assignment:
 
     def empty_bucket(self):
         # Delete bucket versions
-        versions = self.client.list_object_versions(Bucket=self.bucket_name)['Versions']
-        while versions:
+        versions = self.client.list_object_versions(Bucket=self.bucket_name)
+        if 'Versions' in versions:
+            while versions:
             # Delete bucket versions
-            delete_keys = [{'Key': v['Key'], 'VersionId': v['VersionId']} for v in versions]
-            self.client.delete_objects(Bucket=self.bucket_name, Delete={'Objects': delete_keys})
-            versions = self.client.list_object_versions(Bucket=self.bucket_name)['Versions']
-        # Empty bucket from files
-        objects = [{'Key': obj['Key']} for obj in
-                   self.client.list_objects(Bucket=self.bucket_name)['Contents']]
-        self.client.delete_objects(Bucket=self.bucket_name, Delete={'Objects': objects})
-
+                delete_keys = []
+                for v in versions['Versions']:
+                    dict = {}
+                    dict['Key'] = v['Key']
+                    dict['VersionId'] = v['VersionId']
+                    delete_keys.append(dict)
+                self.client.delete_objects(Bucket=self.bucket_name, Delete={'Objects': delete_keys})
+                versions = self.client.list_object_versions(Bucket=self.bucket_name)['Versions']
 
 
 parser = argparse.ArgumentParser(description='Operations on the storage bucket ')

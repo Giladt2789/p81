@@ -1,8 +1,6 @@
 name: Github Actions pipeline testing
 
 on:
-#  push:
-#    branches: [ main ]
   workflow_dispatch:
     inputs:
       REGION:
@@ -55,11 +53,9 @@ jobs:
       run: | 
         echo "The parameters are: ${{ toJSON(github.event.inputs) }}"
 
-
   pre-requisites:
     needs: install
     runs-on: ubuntu-latest
-
     steps:
     - uses: actions/checkout@v4
     - name: Clean existing AWS CLI
