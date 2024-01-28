@@ -46,12 +46,12 @@ jobs:
       with:
         aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
         aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-        aws-region: eu-central-1
+        aws-region: $REGION
     - name: Configure AWS CLI
       run: |
         aws configure set aws_access_key_id ${{ secrets.AWS_ACCESS_KEY_ID }}
         aws configure set aws_secret_access_key ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-        aws configure set default.region eu-central-1
+        aws configure set default.region $REGION
         aws configure set default.output json
     - name: Install dependencies
       run: |
@@ -73,13 +73,13 @@ jobs:
         with:
           aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
           aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-          aws-region: eu-central-1
+          aws-region: $REGION
       - name: Configure AWS CLI
         run: |
-          aws configure set aws_access_key_id ${{ secrets.AWS_ACCESS_KEY_ID }}
-          aws configure set aws_secret_access_key ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-          aws configure set default.region eu-central-1
-          aws configure set default.output json
+          aws configure set --profile default aws_access_key_id ${{ secrets.AWS_ACCESS_KEY_ID }}
+          aws configure set --profile default aws_secret_access_key ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          aws configure set --profile default default.region $REGION
+          aws configure set --profile default default.output json
       - name: Input env. variables into global.tfvars in order to use them in deployment
         run: |
           cd Terraform
