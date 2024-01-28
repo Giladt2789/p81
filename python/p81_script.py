@@ -61,7 +61,7 @@ class Assignment:
 
 
 
-parser = argparse.ArgumentParser(description='Upload filtered products list to s3')
+parser = argparse.ArgumentParser(description='Operations on the storage bucket ')
 parser.add_argument('--bucket', type=str, required=True, help='Name of bucket created in terraform')
 parser.add_argument('--region', type=str, required=True, help='AWS region name')
 parser.add_argument('--destroy', type=str, required=False, help='Destroy the bucket before complete clean up')
