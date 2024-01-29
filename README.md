@@ -34,6 +34,9 @@ In the process of solving this home assignment, i've made some assumptions and t
     * Action - this part is my overthinking:<br>
       * If i want to execture the assignment mission - i provide the keyword "create".<br> 
       * If i want to destroy the infrastructure, for whatever reason - i provide the keyword "destroy". <br>
+Input parameters can be shown here:<br>
+![image](https://github.com/Giladt2789/p81/assets/112761499/1a3e62b5-7b8a-41d2-8aa0-6bb5dc1135ce)
+
 3. In order not to over-complex the task, i didn't used a self-hosted runner for github (it wasn't the assignment to create that machine).<br>
 If i was to create that machine - many steps would have been avoided.<br>
 
