@@ -10,7 +10,6 @@ on:
       STATE_FILES_BUCKET:
         description: 'The buckets name where the state file would be stored'
         required: true
-        default: 'p81-gilad-state-files-bucket'
       PROFILE_NAME:
         description: 'AWS Profile name to be used with AWS/boto3/Terraform API calls'
         required: true
@@ -18,11 +17,9 @@ on:
       STATEFILE_LOCK_TABLE:
         description: 'The DynamoDB tables name to store the LockID for terraform backend'
         required: true
-        default: 'p81-gilad-statefile-locks-table'
       ACCOUNT_NUMBER: 
         description: 'The AWS account number (provided in assignment)'
         required: true
-        default: '329082085800'
       IAM_USER_NAME:
         description: 'Username given for assignment for AWS'
         required: true
@@ -30,7 +27,6 @@ on:
       TASK_BUCKET_NAME:
         description: 'The bucket where the final parsed json will be stored'
         required: true
-        default: 'gilad-assignment-jan-2024'
       ORIGIN_ID:
         description: 'Cloudfront origin id'
         required: true
@@ -148,7 +144,7 @@ jobs:
             pip install -r ./requirements.txt
             python ./p81_script.py --region ${{ github.event.inputs.REGION }} --bucket ${{ github.event.inputs.TASK_BUCKET_NAME }} --destroy ${{ env.FLAG }}
           fi
-      - name: Deploy or remove infrastructure - depenend on the action flag
+      - name: Deploy or remove infrastructure - depend on the action flag
         uses: gruntwork-io/terragrunt-action@v2
         env:
           STATE_FILES_BUCKET: ${{ github.event.inputs.STATE_FILES_BUCKET }}

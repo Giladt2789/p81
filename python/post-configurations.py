@@ -36,8 +36,7 @@ if 'Contents' in list_objects:
         dict['Key'] = obj['Key']
         objects.append(dict)
     s3_client.delete_objects(Bucket=bucket_name,
-                            Delete={
-                                'Objects': objects})
+                            Delete={'Objects': objects})
 
 # Delete empty bucket
 s3_client.delete_bucket(Bucket=bucket_name)
