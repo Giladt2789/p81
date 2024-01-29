@@ -10,31 +10,24 @@ on:
       STATE_FILES_BUCKET:
         description: 'The buckets name where the state file would be stored'
         required: true
-        default: 'p81-gilad-state-files-bucket'
       PROFILE_NAME:
         description: 'AWS Profile name to be used with AWS/boto3/Terraform API calls'
         required: true
-        default: 'default'
       STATEFILE_LOCK_TABLE:
         description: 'The DynamoDB tables name to store the LockID for terraform backend'
         required: true
-        default: 'p81-gilad-statefile-locks-table'
       ACCOUNT_NUMBER: 
         description: 'The AWS account number (provided in assignment)'
         required: true
-        default: '329082085800'
       IAM_USER_NAME:
         description: 'Username given for assignment for AWS'
         required: true
-        default: 'gilad-tayeb'
       TASK_BUCKET_NAME:
         description: 'The bucket where the final parsed json will be stored'
         required: true
-        default: 'gilad-assignment-jan-2024'
       ORIGIN_ID:
         description: 'Cloudfront origin id'
         required: true
-        default: 'jsonOrigin'
       ACTION:
         description: 'For internal uses, can create/destroy the infrastructure'
         required: false
